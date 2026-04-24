@@ -100,7 +100,7 @@ class WorkshopInterface(BuildingInterface):
     
     def get_items(self):
         """Получить список предметов для крафта"""
-        from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+        from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
         
         if self.category == 'weapons':
             return list(WEAPON_STATS.keys())
@@ -111,7 +111,7 @@ class WorkshopInterface(BuildingInterface):
     
     def can_craft(self, item_name):
         """Проверить, можно ли создать предмет"""
-        from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+        from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
         
         if self.category == 'weapons':
             cost = WEAPON_STATS.get(item_name, {}).get('cost', {})
@@ -127,7 +127,7 @@ class WorkshopInterface(BuildingInterface):
     
     def craft_item(self, item_name):
         """Создать предмет"""
-        from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+        from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
         
         if not self.can_craft(item_name):
             return False
@@ -247,7 +247,7 @@ class WorkshopInterface(BuildingInterface):
             screen.blit(item_text, (self.x + 30, item_y + 5))
             
             # Стоимость
-            from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+            from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
             
             if self.category == 'weapons':
                 cost = WEAPON_STATS.get(item, {}).get('cost', {})
@@ -275,7 +275,7 @@ class WorkshopInterface(BuildingInterface):
             cost_items = []
             can_craft = True
             for resource, amount in cost.items():
-                from main import RESOURCE_TYPES
+                from game.config import RESOURCE_TYPES
                 res_name = RESOURCE_TYPES.get(resource, {}).get('name', resource)
                 player_amount = self.player.resources.get(resource, 0)
                 
@@ -419,7 +419,7 @@ class ShopInterface(BuildingInterface):
     
     def get_item_value(self, item):
         """Получить стоимость предмета в золоте"""
-        from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+        from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
         
         if item['type'] == 'weapon':
             stats = WEAPON_STATS.get(item['name'], {})
@@ -498,7 +498,7 @@ class ShopInterface(BuildingInterface):
                 screen.blit(value_text, (self.x + 400, item_y + 10))
                 
                 # Статистики предмета
-                from main import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
+                from game.config import WEAPON_STATS, ARMOR_STATS, ACCESSORY_STATS
                 
                 if item['type'] == 'weapon':
                     stats = WEAPON_STATS.get(item['name'], {})
